@@ -1,3 +1,5 @@
+import React from 'react';
+
 var CurrencyInput = React.createClass({
 	getInitialState(){
 		// initial state/value
@@ -48,3 +50,5 @@ var CurrencyInput = React.createClass({
 		);
 	}
 });
+
+export.module = CurrencyInput
