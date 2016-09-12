@@ -6,7 +6,6 @@ var InputField = React.createClass({
 	  	return { 
 			value: null,
 			confirmed: false,
-			editable: false,
 			frequency: 0,
 		};
 	},
@@ -35,7 +34,6 @@ var InputField = React.createClass({
 	     
 	    this.setState({ 
 			confirmed: true,
-			editable: true 
 		});
 	},
 	editInput: function(e){
@@ -50,7 +48,6 @@ var InputField = React.createClass({
 	     
 	    this.setState({ 
 			confirmed: false,
-			editable: false 
 		});
 	},
 	removeInput: function(e){
@@ -71,7 +68,6 @@ var InputField = React.createClass({
 	render: function() {
 		var validClass = "";
 		var inputConfirmed = this.state.confirmed
-		var editable = this.state.editable
 		var first = this.props.reference
 
 		if(first == "static") {
@@ -96,8 +92,8 @@ var InputField = React.createClass({
 					<option value="1">Weekly</option>
 				</select>
 				<button type="button" className={inputConfirmed ? 'hide' : ''} onClick={this.submitInput}>Confirm</button>
-				<button type="button" className={inputConfirmed && !editable ? '' : 'hide'} onClick={this.removeInput} >Remove input</button>
-				<button type="button" className={editable && !first ? '' : 'hide'} onClick={this.editInput} >Edit input</button>
+				<button type="button" className={inputConfirmed && first ? '' : 'hide'} onClick={this.editInput} >Edit</button>
+				<button type="button" className={inputConfirmed && !first ? '' : 'hide'} onClick={this.removeInput} >Remove</button>
 			</div>
 		)
 	}

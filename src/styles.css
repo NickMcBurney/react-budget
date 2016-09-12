@@ -14,6 +14,7 @@ body {
   box-sizing: border-box;
   font-weight: 600;
   max-width: 100%;
+  background: #f1f1f1;
 }
 
 .hide {
@@ -22,6 +23,9 @@ body {
 
 .question {
   padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  border-bottom: #aaa;
 }
 .question > label {
   display: block;
