@@ -1,0 +1,203 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800);
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+body {
+  font-family: Open Sans;
+  font-size: 16px;
+  width: 960px;
+  max-width: 100%;
+  margin: 30px auto;
+  padding: 30px;
+  box-sizing: border-box;
+  font-weight: 600;
+  max-width: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+.question {
+  padding: 20px;
+}
+.question > label {
+  display: block;
+  margin-bottom: 10px;
+}
+.question > input {
+  width: 380px;
+  max-width: 100%;
+  padding: 0 20px;
+  border: 1px solid #AAA;
+  height: 60px;
+  line-height: 60px;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: Open Sans;
+}
+.question > input.half:first-of-type {
+  width: 48%;
+  margin-right: 2%;
+  float: left;
+}
+.question > input.half:last-of-type {
+  width: 48%;
+  margin-left: 2%;
+  float: left;
+}
+.question > input:focus {
+  outline: 0;
+  border: 1px solid #35a3e8;
+  box-shadow: 0 0 10px #35a3e8;
+}
+.question > input.input-valid {
+  border-color: #3bdc52;
+  color: #3bdc52;
+}
+.question > input.input-error {
+  border-color: tomato;
+  color: tomato;
+}
+.question fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 380px;
+  max-width: 100%;
+  font-size: 0;
+  position: relative;
+}
+.question fieldset legend {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.question fieldset label {
+  width: 120px;
+  height: 60px;
+  line-height: 60px;
+  background: #454545;
+  color: #FFF;
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.question fieldset label:nth-of-type(3n) {
+  margin-right: 0;
+}
+.question fieldset input:hover + label {
+  background: rgba(53, 163, 232, 0.66);
+  color: #fff;
+}
+.question fieldset input:focus + label,
+.question fieldset input:checked + label {
+  background: #35a3e8;
+  color: #fff;
+}
+.question fieldset input {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.question fieldset input:focus ~ .focus {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  margin: -10px;
+  padding: 10px 10px 0;
+  outline: 0;
+  border: 1px solid #35a3e8;
+  box-shadow: 0 0 10px #35a3e8;
+  z-index: -1;
+}
+.question fieldset.input-error label {
+  color: tomato;
+  border: 1px solid tomato;
+}
+.question fieldset .input-error + label {
+  color: tomato;
+  border: 1px solid tomato;
+}
+
+
+button {
+  width: 380px;
+  height: 75px;
+  line-height: 75px;
+  background: #35a3e8;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: Open Sans;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+}
+button.half:first-of-type {
+  width: 48%;
+  margin-right: 2%;
+  margin-left: 0;
+  float: left;
+}
+button.half:last-of-type {
+  width: 48%;
+  margin-left: 2%;
+  margin-right: 0;
+  float: left;
+}
+button.secondary {
+  height: 60px;
+  line-height: 60px;
+  background: rgba(53, 163, 232, 0.66);
+  margin-top: 10px;
+}
+button.secondary.attached {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 0;
+}
+button.button-error {
+  background: tomato;
+  color: #fff;
+}
+fieldset button {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 100%;
+  background: #3bdc52;
+  margin: 0 0 0 20px;
+  vertical-align: top;
+  font-size: 12px;
+  text-align: center;
+  padding: 0;
+    
+}
+
+.message-error {
+  color: tomato;
+  padding: 5px 0;
+  font-size: 14px;
+  display: block;
+}
+
+pre {
+  width: 100%;
+  display: inline-block;
+}
