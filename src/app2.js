@@ -6,6 +6,7 @@ var InputField = React.createClass({
 	  	return { 
 			value: null,
 			confirmed: false,
+			editable: false,
 			frequency: 0,
 		};
 	},
@@ -33,7 +34,23 @@ var InputField = React.createClass({
 	    this.props.onSubmit(e.target.name, value);
 	     
 	    this.setState({ 
-			confirmed: true 
+			confirmed: true,
+			editable: true 
+		});
+	},
+	editInput: function(e){
+		var value = 0;
+		if(this.state.frequency == 0) {
+			value = this.state.value;
+		} else if (this.state.frequency == 1) {
+			value = this.state.value * 4;
+		}
+		
+	    this.props.onEdit(e.target.name, value);
+	     
+	    this.setState({ 
+			confirmed: false,
+			editable: false 
 		});
 	},
 	removeInput: function(e){
@@ -54,6 +71,14 @@ var InputField = React.createClass({
 	render: function() {
 		var validClass = "";
 		var inputConfirmed = this.state.confirmed
+		var editable = this.state.editable
+		var first = this.props.reference
+
+		if(first == "static") {
+			first = true
+		} else {
+			first = false;
+		}
 		
 		if (inputConfirmed) {
 			validClass = "input-valid"
@@ -71,7 +96,8 @@ var InputField = React.createClass({
 					<option value="1">Weekly</option>
 				</select>
 				<button type="button" className={inputConfirmed ? 'hide' : ''} onClick={this.submitInput}>Confirm</button>
-				<button type="button" className={inputConfirmed ? '' : 'hide'} onClick={this.removeInput} >Remove input</button>
+				<button type="button" className={inputConfirmed && !editable ? '' : 'hide'} onClick={this.removeInput} >Remove input</button>
+				<button type="button" className={editable && !first ? '' : 'hide'} onClick={this.editInput} >Edit input</button>
 			</div>
 		)
 	}
@@ -102,6 +128,14 @@ var Calculator = React.createClass({
 			result: running
 		});	
 	},
+	handleInputEdited: function(name, value) {
+		var running = this.state.result;
+		running = running - value
+				
+		this.setState({ 
+			result: running,
+		});
+	},
 	handleInputRemoved: function(name, value) {
 		var running = this.state.result;
 		running = running - value
@@ -110,7 +144,6 @@ var Calculator = React.createClass({
 			result: running,
 			inputCount: this.state.inputCount - 1
 		});
-		//this.removeInput
 	},
 	render: function() {
 		var inputs = [];
@@ -122,16 +155,25 @@ var Calculator = React.createClass({
 		  result = this.state.result;
 		}
 		
+		var fixedLabel = "";
+		var dynamicLabel = ""
+
+		if(this.props.type == "incoming"){
+			fixedLabel = "Salary"
+			dynamicLabel = "New incoming (e.g. benefits)"
+		} else {
+			fixedLabel = "Mortgage/Rent"
+			dynamicLabel = "New outgoing (e.g. phone bill, utilities, tv/internet etc)"
+		}
+		
 		var thisElm = this;
 		return (		 
 		 <fieldset>
 		 	<legend>{this.props.legend}</legend>
-			 <InputField label="Add this" key="0" ref="incoming" onSubmit={this.handleInputConfimed} />
-			 <InputField label="to this" key="1" ref="incoming" onSubmit={this.handleInputConfimed} />
+			 <InputField label={fixedLabel} key="0" reference="static" onSubmit={this.handleInputConfimed} onEdit={thisElm.handleInputEdited} />
 			 {
 				 inputs.map(function (result) {
-					 console.log(result)
-					 return <InputField key={result + 2} ref="incoming" label="New incoming"  onRemove={thisElm.handleInputRemoved} onSubmit={thisElm.handleInputConfimed} />;
+					 return <InputField key={result + 1} reference={"dynamic" + result} label={dynamicLabel}  onRemove={thisElm.handleInputRemoved} onSubmit={thisElm.handleInputConfimed} />;
 				 })
 			 }
 			 <button type="button" onClick={this.addInput}>Add input</button>
@@ -164,8 +206,8 @@ var Form = React.createClass({
 		}
 		return (
 			<form>
-				<Calculator legend="Incoming Calculator" ref="incoming"/>
-				<Calculator legend="Outgoing Calculator" ref="outgoing"/>
+				<Calculator legend="Incoming Calculator" ref="incoming" type="incoming"/>
+				<Calculator legend="Outgoing Calculator" ref="outgoing" type="outgoing"/>
 				
 				<div className="question">
 					<p>Result: {result}</p>
